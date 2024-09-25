@@ -1,22 +1,41 @@
 <div class="cinepolis-container">
-    <h2>Calculadora de Boletos Cinepolis</h2>
-    
-    <form [formGroup]="form" (ngSubmit)="calcularTotalBoletos()">
-      <div class="form-group">
-        <label for="cantidadBoletos">Cantidad de Boletos:</label>
-        <input formControlName="cantidadBoletos" type="number" id="cantidadBoletos" min="1" max="7" />
+  <h2>Calculadora de Boletos Cinepolis</h2>
+  
+  <form [formGroup]="form" (ngSubmit)="calcularTotalBoletos()">
+    <!-- Campo para el nombre del comprador -->
+    <div class="form-group">
+      <label for="nombreComprador">Nombre del Comprador:</label>
+      <input formControlName="nombreComprador" type="text" id="nombreComprador" />
+      
+      <!-- Se usa el encadenamiento opcional ?. para evitar el error cuando form.get('nombreComprador') es null -->
+      <div *ngIf="form.get('nombreComprador')?.invalid && form.get('nombreComprador')?.touched">
+        <small>El nombre es requerido y debe tener al menos 3 caracteres.</small>
       </div>
-  
-      <div class="form-group">
-        <label for="usaTarjetaCineco">¿Usa Tarjeta CINECO?</label>
-        <input formControlName="usaTarjetaCineco" type="checkbox" id="usaTarjetaCineco" />
-      </div>
-  
-      <button type="submit" [disabled]="form.invalid">Calcular</button>
-    </form>
-  
-    <div *ngIf="totalPagar">
-      <p>Total a pagar: {{ totalPagar | currency:'USD':true }}</p>
     </div>
+
+    <!-- Campo para la cantidad de compradores -->
+    <div class="form-group">
+      <label for="cantidadCompradores">Cantidad de Compradores:</label>
+      <input formControlName="cantidadCompradores" type="number" id="cantidadCompradores" min="1" />
+    </div>
+
+    <!-- Campo para la tarjeta CINECO -->
+    <div class="form-group">
+      <label for="usaTarjetaCineco">¿Usa Tarjeta CINECO?</label>
+      <input formControlName="usaTarjetaCineco" type="checkbox" id="usaTarjetaCineco" />
+    </div>
+
+    <!-- Campo para la cantidad de boletos -->
+    <div class="form-group">
+      <label for="cantidadBoletos">Cantidad de Boletos (Máximo 7 por persona):</label>
+      <input formControlName="cantidadBoletos" type="number" id="cantidadBoletos" min="1" max="7" />
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Calcular</button>
+  </form>
+
+  <!-- Muestra el total a pagar si ya se ha calculado -->
+  <div *ngIf="totalPagar > 0">
+    <p>Total a pagar: {{ totalPagar | currency:'USD':true }}</p>
   </div>
-  
+</div>
