@@ -1,0 +1,108 @@
+<div style="text-align: center;">
+  <h1>Calculadora Resistencias</h1><br>
+
+  <!-- Formulario para seleccionar los colores y la tolerancia -->
+  <form [formGroup]="resistenciaForm" (ngSubmit)="calcular()">
+
+    <!-- Fila con las tres bandas -->
+    <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+      
+      <!-- Primera Banda -->
+      <div style="text-align: center;">
+        <label for="color1" style="display: block;">Primer Banda</label>
+        <div style="display: flex; align-items: center;">
+          <label for="color1" style="margin-right: 10px;">Color 1</label>
+          <select id="color1" formControlName="color1">
+            <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Segunda Banda -->
+      <div style="text-align: center;">
+        <label for="color2" style="display: block;">Segunda Banda</label>
+        <div style="display: flex; align-items: center;">
+          <label for="color2" style="margin-right: 10px;">Color 2</label>
+          <select id="color2" formControlName="color2">
+            <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tercera Banda -->
+      <div style="text-align: center;">
+        <label for="color3" style="display: block;">Tercera Banda</label>
+        <div style="display: flex; align-items: center;">
+          <label for="color3" style="margin-right: 10px;">Color 3</label>
+          <select id="color3" formControlName="color3">
+            <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tolerancia -->
+    <div style="margin-top: 50px; display: flex; flex-direction: column; align-items: flex-start;">
+      <p>Tolerancia</p>
+      <label>
+        <input type="radio" formControlName="tolerancia" value="oro"> Oro
+      </label>
+      <label>
+        <input type="radio" formControlName="tolerancia" value="plata"> Plata
+      </label>
+    </div>
+
+    <button type="submit" style="margin-top: 20px;">Registrar</button>
+
+  </form>
+
+  <!-- Resultados -->
+  <div *ngIf="resultado">
+    <table border="1" style="margin-top: 20px; margin-left: auto; margin-right: auto; border-spacing: 10px; border-collapse: separate;">
+      <thead>
+        <tr>
+          <th>Color1</th>
+          <th>Color2</th>
+          <th>Color3</th>
+          <th>Tolerancia</th>
+          <th>Valor</th>
+          <th>Valor Máximo</th>
+          <th>Valor Mínimo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- Color 1 -->
+          <td [ngStyle]="{'background-color': getColorCode(resistenciaForm.value.color1), 'padding': '10px', 'border-bottom': '1px solid black'}">
+            {{resistenciaForm.value.color1}}
+          </td>
+
+          <!-- Color 2 -->
+          <td [ngStyle]="{'background-color': getColorCode(resistenciaForm.value.color2), 'padding': '10px', 'border-bottom': ''}">
+            {{resistenciaForm.value.color2}}
+          </td>
+
+          <!-- Color 3 -->
+          <td [ngStyle]="{'background-color': getColorCode(resistenciaForm.value.color3), 'padding': '10px', 'border-bottom': ''}">
+            {{resistenciaForm.value.color3}}
+          </td>
+
+          <!-- Tolerancia -->
+          <td [ngStyle]="{'background-color': getToleranceColor(), 'padding': '10px', 'border-bottom': ''}">
+            {{resistenciaForm.value.tolerancia === 'oro' ? 'Dorado 5%' : 'Plata 10%'}}
+          </td>
+
+          <!-- Valor -->
+          <td [ngStyle]="{'padding': '10px', 'border-bottom': ''}">{{valor}}</td>
+
+          <!-- Valor Máximo -->
+          <td [ngStyle]="{'padding': '10px', 'border-bottom': ''}">{{valorMax}}</td>
+
+          <!-- Valor Mínimo -->
+          <td [ngStyle]="{'padding': '10px', 'border-bottom': ''}">{{valorMin}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #555;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Contenedor del formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Etiquetas y Selectores */
+label {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+select, input[type="radio"] {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-right: 10px;
+}
+
+select:focus, input[type="radio"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Tablas de resultados */
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f8f8f8;
+  color: #555;
+}
+
+td {
+  background-color: #fff;
+}
+
+/* Colores de las bandas */
+td[ngStyle] {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* Estilo para las filas de color */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
